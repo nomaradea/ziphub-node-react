@@ -457,7 +457,7 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
       pageProps
     } = this.props;
     const config = {
-      apiKey: process.env.SHOPIFY_API_KEY,
+      apiKey: "48858a08967b12629c155f0c0319bc84",
       shopOrigin: js_cookie__WEBPACK_IMPORTED_MODULE_7___default.a.get("shopOrigin"),
       forceRedirect: true
     };

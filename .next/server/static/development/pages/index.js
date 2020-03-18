@@ -111,21 +111,58 @@ __webpack_require__.r(__webpack_exports__);
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 const img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg';
 
-const Index = () => __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_1__["Page"], null, __jsx(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_2__["TitleBar"], {
-  primaryAction: {
-    content: 'Select products'
+class Index extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "state", {
+      open: false
+    });
+
+    _defineProperty(this, "handleSelection", resources => {
+      const idsFromResources = resources.selection.map(product => product.id);
+      this.setState({
+        open: false
+      });
+      console.log(idsFromResources);
+    });
   }
-}), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_1__["EmptyState"], {
-  heading: "Discount your products temporarily",
-  action: {
-    content: 'Select products',
-    onAction: () => console.log('clicked')
-  },
-  image: img
-}, __jsx("p", null, "Select products to change their price temporarily."))));
+
+  render() {
+    return __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_1__["Page"], null, __jsx(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_2__["TitleBar"], {
+      primaryAction: {
+        content: 'Select products',
+        onAction: () => this.setState({
+          open: true
+        })
+      }
+    }), __jsx(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_2__["ResourcePicker"], {
+      resourceType: "Product",
+      showVariants: false,
+      open: this.state.open,
+      onSelection: resources => this.handleSelection(resources),
+      onCancel: () => this.setState({
+        open: false
+      })
+    }), __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_1__["Layout"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_1__["EmptyState"], {
+      heading: "Discount your products temporarily",
+      action: {
+        content: 'Select products',
+        onAction: () => this.setState({
+          open: true
+        })
+      },
+      image: img
+    }, __jsx("p", null, "Select products to change their price temporarily."))));
+  }
+
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);
 
