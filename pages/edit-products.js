@@ -16,7 +16,7 @@ import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
  
 const UPDATE_PRICE = gql`
-    mutation productVariantUpdate($input: productVariantInput!) {
+    mutation productVariantUpdate($input: ProductVariantInput!) {
         productVariantUpdate(input: $input) {
             product {
                 title
@@ -33,7 +33,7 @@ class EditProduct extends React.Component {
     state = {
       discount: '',
       price: '',
-      variantId: ''
+      variantId: '',
       showToast: false,
     }
   
@@ -96,12 +96,12 @@ class EditProduct extends React.Component {
                                                     {
                                                         content: 'Save',
                                                         onAction: () => {
-                                                            const productVariantInput = {
+                                                            const ProductVariantInput = {
                                                                 id: variantId,
                                                                 price: discount,
                                                             }
                                                             handleSubmit({
-                                                                variables: { input: productVariantInput },
+                                                                variables: { input: ProductVariantInput },
                                                             })
                                                         }
                                                     }
