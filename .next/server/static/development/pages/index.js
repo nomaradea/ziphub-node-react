@@ -112,8 +112,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_shopify_polaris__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var store_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! store-js */ "store-js");
 /* harmony import */ var store_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(store_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @shopify/app-bridge/actions */ "@shopify/app-bridge/actions");
+/* harmony import */ var _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @shopify/app-bridge-react */ "@shopify/app-bridge-react");
+/* harmony import */ var _shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_6__);
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
 
 
 
@@ -149,6 +158,13 @@ const GET_PRODUCTS_BY_ID = graphql_tag__WEBPACK_IMPORTED_MODULE_1___default.a`
 
 class ResourceListWithProducts extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   render() {
+    const app = this.context;
+
+    const redirectToProduct = () => {
+      const redirect = _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_5__["Redirect"].create(app);
+      redirect.dispatch(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_5__["Redirect"].Action.APP, '/edit-products');
+    };
+
     const twoWeeksFromNow = new Date(Date.now() + 12096e5).toDateString();
     return __jsx(react_apollo__WEBPACK_IMPORTED_MODULE_2__["Query"], {
       query: GET_PRODUCTS_BY_ID,
@@ -180,7 +196,11 @@ class ResourceListWithProducts extends react__WEBPACK_IMPORTED_MODULE_0___defaul
           return __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_3__["ResourceList"].Item, {
             id: item.id,
             media: media,
-            accessibilityLabel: `View details for ${item.title}`
+            accessibilityLabel: `View details for ${item.title}`,
+            onClick: () => {
+              store_js__WEBPACK_IMPORTED_MODULE_4___default.a.set('item', item);
+              redirectToProduct();
+            }
           }, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_3__["Stack"], null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_3__["Stack"].Item, {
             fill: true
           }, __jsx("h3", null, __jsx(_shopify_polaris__WEBPACK_IMPORTED_MODULE_3__["TextStyle"], {
@@ -192,6 +212,8 @@ class ResourceListWithProducts extends react__WEBPACK_IMPORTED_MODULE_0___defaul
   }
 
 }
+
+_defineProperty(ResourceListWithProducts, "contextType", _shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_6__["Context"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (ResourceListWithProducts);
 
@@ -298,6 +320,17 @@ module.exports = __webpack_require__(/*! C:\Users\Acer\Documents\ziphub-node-rea
 /***/ (function(module, exports) {
 
 module.exports = require("@shopify/app-bridge-react");
+
+/***/ }),
+
+/***/ "@shopify/app-bridge/actions":
+/*!**********************************************!*\
+  !*** external "@shopify/app-bridge/actions" ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@shopify/app-bridge/actions");
 
 /***/ }),
 
